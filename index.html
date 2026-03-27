@@ -261,41 +261,7 @@
   }
   #timer-stop:hover { background: rgba(255,255,255,0.22); }
 
-  /* MOOD BUTTONS */
-  .mood-btn {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 4px; padding: 10px 6px; border-radius: 12px;
-    border: 1.5px solid #ede8f5; background: white;
-    cursor: pointer; transition: all 0.15s; font-family: 'Jost', sans-serif;
-    width: 72px; height: 72px;
-  }
-  .mood-btn:hover { transform: scale(1.08); border-color: #c4a8e0; background: #f8f0ff; }
-  .mood-btn.selected { border-color: #c4a8e0; background: #f0e8ff; transform: scale(1.08); }
-  .mood-btn span { font-size: 26px; line-height: 1; }
-  .mood-btn small { font-size: 10px; color: #9b8ab0; font-family: 'Jost', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; }
 
-  /* SYMPTOM ROWS */
-  .symptom-row {
-    display: flex; align-items: center; gap: 10px;
-    padding: 9px 12px; border-radius: 12px;
-    border: 1.5px solid #ede8f5; background: white;
-    cursor: pointer; font-size: 13px; color: #3d2b5a;
-    font-family: 'Jost', sans-serif; transition: all 0.15s;
-  }
-  .symptom-row:hover { border-color: #c4a8e0; background: #f8f0ff; }
-  .symptom-row input {
-    width: 16px; height: 16px; accent-color: #c4a8e0;
-    cursor: pointer; flex-shrink: 0;
-    appearance: none; -webkit-appearance: none;
-    border: 1.5px solid #c4a8e0; border-radius: 4px;
-    background: white; transition: all 0.15s;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .symptom-row input:checked {
-    background: #c4a8e0; border-color: #c4a8e0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-size: 10px; background-repeat: no-repeat; background-position: center;
-  }
 
   /* CHECK-IN BADGE on task screen */
   .checkin-badge {
@@ -451,69 +417,6 @@
       </button>
     </div>
 
-    <!-- STEP 2: MOOD -->
-    <div id="step-mood" style="display:none;">
-      <div class="energy-intro">
-        <div class="star">✦</div>
-        <h2>What's your mood?</h2>
-        <p>Be honest. No wrong answers.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(5,72px);gap:10px;margin-bottom:16px;justify-content:center;">
-        <button class="mood-btn" onclick="pickMood('😴','exhausted')"><span>😴</span><small>exhausted</small></button>
-        <button class="mood-btn" onclick="pickMood('😪','sleepy')"><span>😪</span><small>sleepy</small></button>
-        <button class="mood-btn" onclick="pickMood('😔','sad')"><span>😔</span><small>sad</small></button>
-        <button class="mood-btn" onclick="pickMood('😢','tearful')"><span>😢</span><small>tearful</small></button>
-        <button class="mood-btn" onclick="pickMood('😰','anxious')"><span>😰</span><small>anxious</small></button>
-        <button class="mood-btn" onclick="pickMood('😤','irritable')"><span>😤</span><small>irritable</small></button>
-        <button class="mood-btn" onclick="pickMood('😠','frustrated')"><span>😠</span><small>frustrated</small></button>
-        <button class="mood-btn" onclick="pickMood('😮‍💨','overwhelmed')"><span>😮‍💨</span><small>overwhelmed</small></button>
-        <button class="mood-btn" onclick="pickMood('🌫️','foggy')"><span>🌫️</span><small>foggy</small></button>
-        <button class="mood-btn" onclick="pickMood('🫠','melting')"><span>🫠</span><small>melting</small></button>
-        <button class="mood-btn" onclick="pickMood('😕','meh')"><span>😕</span><small>meh</small></button>
-        <button class="mood-btn" onclick="pickMood('😐','neutral')"><span>😐</span><small>neutral</small></button>
-        <button class="mood-btn" onclick="pickMood('🙂','okay')"><span>🙂</span><small>okay</small></button>
-        <button class="mood-btn" onclick="pickMood('😌','calm')"><span>😌</span><small>calm</small></button>
-        <button class="mood-btn" onclick="pickMood('🧘','grounded')"><span>🧘</span><small>grounded</small></button>
-        <button class="mood-btn" onclick="pickMood('😊','good')"><span>😊</span><small>good</small></button>
-        <button class="mood-btn" onclick="pickMood('🥰','happy')"><span>🥰</span><small>happy</small></button>
-        <button class="mood-btn" onclick="pickMood('🤩','excited')"><span>🤩</span><small>excited</small></button>
-        <button class="mood-btn" onclick="pickMood('✨','inspired')"><span>✨</span><small>inspired</small></button>
-        <button class="mood-btn" onclick="pickMood('💪','motivated')"><span>💪</span><small>motivated</small></button>
-        <button class="mood-btn" onclick="pickMood('🤒','unwell')"><span>🤒</span><small>unwell</small></button>
-        <button class="mood-btn" onclick="pickMood('😶','numb')"><span>😶</span><small>numb</small></button>
-        <button class="mood-btn" onclick="pickMood('🌀','restless')"><span>🌀</span><small>restless</small></button>
-        <button class="mood-btn" onclick="pickMood('🫶','grateful')"><span>🫶</span><small>grateful</small></button>
-        <button class="mood-btn" onclick="pickMood('🛌','asleep')"><span>🛌</span><small>asleep</small></button>
-      </div>
-    </div>
-
-    <!-- STEP 3: PHYSICAL SYMPTOMS -->
-    <div id="step-symptoms" style="display:none;">
-      <div class="energy-intro">
-        <div class="star">✦</div>
-        <h2>Any physical symptoms?</h2>
-        <p>Tick all that apply. Skip if none.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;max-width:420px;margin-left:auto;margin-right:auto;">
-        <label class="symptom-row"><input type="checkbox" value="headache" onchange="toggleSymptom(this)"> 🤕 Headache</label>
-        <label class="symptom-row"><input type="checkbox" value="fatigue" onchange="toggleSymptom(this)"> 😪 Fatigue / heavy body</label>
-        <label class="symptom-row"><input type="checkbox" value="brainfog" onchange="toggleSymptom(this)"> 🌁 Brain fog</label>
-        <label class="symptom-row"><input type="checkbox" value="tension" onchange="toggleSymptom(this)"> 😬 Tension / stiffness</label>
-        <label class="symptom-row"><input type="checkbox" value="gut" onchange="toggleSymptom(this)"> 🫀 Digestive discomfort</label>
-        <label class="symptom-row"><input type="checkbox" value="cramps" onchange="toggleSymptom(this)"> 🌙 Period cramps</label>
-        <label class="symptom-row"><input type="checkbox" value="pms" onchange="toggleSymptom(this)"> 🔴 PMS / hormonal day</label>
-        <label class="symptom-row"><input type="checkbox" value="bloating" onchange="toggleSymptom(this)"> 🎈 Bloating</label>
-        <label class="symptom-row"><input type="checkbox" value="backpain" onchange="toggleSymptom(this)"> 🦴 Back / lower back pain</label>
-        <label class="symptom-row"><input type="checkbox" value="eyestrain" onchange="toggleSymptom(this)"> 👁 Eye strain / tired eyes</label>
-        <label class="symptom-row"><input type="checkbox" value="anxietybody" onchange="toggleSymptom(this)"> 💓 Anxiety in body</label>
-        <label class="symptom-row"><input type="checkbox" value="nausea" onchange="toggleSymptom(this)"> 🤢 Nausea</label>
-        <label class="symptom-row"><input type="checkbox" value="cold" onchange="toggleSymptom(this)"> 🤧 Cold / congestion</label>
-        <label class="symptom-row"><input type="checkbox" value="lowappetite" onchange="toggleSymptom(this)"> 🍽 Low appetite</label>
-        <label class="symptom-row"><input type="checkbox" value="hypersensitive" onchange="toggleSymptom(this)"> 🌡 Sensory hypersensitivity</label>
-        <label class="symptom-row"><input type="checkbox" value="fine" onchange="toggleSymptom(this)"> ✅ Feeling fine physically</label>
-      </div>
-      <button onclick="finishCheckin()" style="display:block;width:100%;max-width:420px;margin:0 auto;background:linear-gradient(135deg,#c4a8e0,#a8d0e0);border:none;border-radius:14px;padding:14px;font-family:'Jost',sans-serif;font-size:16px;font-weight:600;color:white;cursor:pointer;letter-spacing:1px;">Start my day ✦</button>
-    </div>
 
   </div>
 
@@ -536,8 +439,6 @@
       <!-- CHECK-IN BADGE -->
       <div class="checkin-badge" id="checkin-badge" style="margin-bottom:8px;">
         <div class="badge-item" id="badge-energy"></div>
-        <div class="badge-item" id="badge-mood"></div>
-        <div class="badge-item" id="badge-symptoms" style="color:#9b8ab0;font-size:12px;"></div>
       </div>
       <!-- Rule -->
       <div class="rule-box" id="rule-box" style="margin-bottom:8px;max-width:960px;margin-left:auto;margin-right:auto;">
@@ -702,67 +603,24 @@ function renderHeader() {
 function pickEnergy(e) {
   state.energy = e;
   save();
-  document.getElementById('step-energy').style.display = 'none';
-  document.getElementById('step-mood').style.display = 'block';
-}
-
-function pickMood(emoji, label) {
-  state.mood = { emoji, label };
-  save();
-  // highlight selected
-  document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
-  setTimeout(() => {
-    document.getElementById('step-mood').style.display = 'none';
-    document.getElementById('step-symptoms').style.display = 'block';
-  }, 300);
-}
-
-function toggleSymptom(el) {
-  if (!state.symptoms) state.symptoms = [];
-  if (el.checked) {
-    if (!state.symptoms.includes(el.value)) state.symptoms.push(el.value);
-  } else {
-    state.symptoms = state.symptoms.filter(s => s !== el.value);
-  }
-  save();
-}
-
-function finishCheckin() {
-  if (!state.mood) { state.mood = { emoji: '😐', label: 'neutral' }; }
-  if (!state.symptoms) state.symptoms = [];
-  save();
   showTasks();
 }
+
 
 function setEnergy(e) { pickEnergy(e); } // legacy compat
 
 function changeEnergy() {
-  state.energy = null; state.mood = null; state.symptoms = [];
+  state.energy = null;
   save();
   document.getElementById('tasks-screen').style.display = 'none';
   document.getElementById('step-energy').style.display = 'block';
-  document.getElementById('step-mood').style.display = 'none';
-  document.getElementById('step-symptoms').style.display = 'none';
-  document.getElementById('energy-screen').style.display = 'block';
+  document.getElementById('energy-screen').style.display = 'flex';
 }
 
 function renderCheckinBadge() {
   const energyMap = { good: { label:'⚡ Full charge', color:'#4caf6e' }, medium: { label:'🌤 Half battery', color:'#e8a030' }, low: { label:'🪫 Almost empty', color:'#9b6db5' } };
   const en = energyMap[state.energy] || {};
   document.getElementById('badge-energy').innerHTML = `<div class="badge-dot" style="background:${en.color||'#ccc'}"></div><span>${en.label||''}</span>`;
-  if (state.mood) {
-    document.getElementById('badge-mood').innerHTML = `<span style="font-size:18px;">${state.mood.emoji}</span><span>${state.mood.label}</span>`;
-  }
-  if (state.symptoms && state.symptoms.length > 0 && !state.symptoms.includes('fine')) {
-    const symLabels = {'headache':'🤕 headache','fatigue':'😪 fatigue','brainfog':'🌁 brain fog','tension':'😬 tension','gut':'🫀 gut discomfort','cramps':'🌙 period cramps','pms':'🔴 PMS','bloating':'🎈 bloating','backpain':'🦴 back pain','eyestrain':'👁 eye strain','anxietybody':'💓 anxiety in body','nausea':'🤢 nausea','cold':'🤧 cold','lowappetite':'🍽 low appetite','hypersensitive':'🌡 hypersensitive'};
-    const labels = state.symptoms.filter(s=>s!=='fine').map(s=>symLabels[s]||s).join('  ·  ');
-    document.getElementById('badge-symptoms').textContent = labels;
-  } else if (state.symptoms && state.symptoms.includes('fine')) {
-    document.getElementById('badge-symptoms').textContent = '✅ feeling fine';
-  } else {
-    document.getElementById('badge-symptoms').textContent = '';
-  }
 }
 
 function showTasks() {
@@ -951,11 +809,7 @@ function toggleBreath() {
 async function init() {
   await load();
   renderHeader();
-  if (state.energy && state.mood) { showTasks(); }
-  else if (state.energy && !state.mood) {
-    document.getElementById('step-energy').style.display = 'none';
-    document.getElementById('step-mood').style.display = 'block';
-  }
+  if (state.energy) { showTasks(); }
   // restore breathing state
   if (state.breathDone) {
     const btn = document.getElementById('breath-btn');
