@@ -42,7 +42,7 @@
   .week-dot {
     width: 26px; height: 26px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 7px; font-weight: bold;
+    font-size: 10px; font-weight: bold;
   }
   .week-dot.today { background: #c4a8e0; color: white; }
   .week-dot.other { background: #f0eaf8; color: #b0a0c8; }
@@ -225,14 +225,8 @@
   }
   .sub-check.checked { background: #c4a8e0; border-color: #c4a8e0; }
 
-  /* LOW DAY NOTE */
-  .low-note {
-    margin-top: 26px; background: #faf6fd;
-    border: 1px dashed #d4b8e0; border-radius: 11px;
-    padding: 13px 16px; text-align: center;
-  }
-  .low-note p { font-size: 15px; color: #7a5a9a; margin-bottom: 3px; }
-  .low-note span { font-size: 14px; color: #b0a0c8; }
+  /* CREATE SECTION */
+  .create-box { background: linear-gradient(135deg, #f0eaff, #fff0fa); border: 1px dashed #c8a8e8; border-radius: 13px; padding: 6px 8px; }
 
   /* FLOATING TIMER */
   #timer-pill {
@@ -313,13 +307,13 @@
       gap: 12px;
       padding: 8px 16px 24px;
     }
-    .col-right { display: none; }
+    .col-mid { display: none; }
     .task-name { font-size: 13px; }
     .task-detail { font-size: 11px; }
     .task-card { padding: 10px; gap: 8px; }
     .checkin-badge { flex-wrap: wrap; gap: 6px; }
     .header-title { font-size: 18px; }
-    .week-dot { width: 22px; height: 22px; font-size: 6px; }
+    .week-dot { width: 22px; height: 22px; font-size: 9px; }
   }
 
   /* Phone (< 600px) — single column, stacked */
@@ -330,11 +324,11 @@
       gap: 16px;
       padding: 8px 14px 32px;
     }
-    .col-right { display: none; }
+    .col-mid { display: none; }
     .header { padding: 10px 14px; }
     .header-title { font-size: 16px; }
     .header-title-sm { font-size: 10px; letter-spacing: 2px; }
-    .week-dot { width: 20px; height: 20px; font-size: 6px; }
+    .week-dot { width: 20px; height: 20px; font-size: 9px; }
     .task-name { font-size: 14px; }
     .task-detail { font-size: 12px; }
     .task-card { padding: 12px; }
@@ -363,7 +357,7 @@
       gap: 10px;
       padding: 6px 12px 16px;
     }
-    .col-right { display: none; }
+    .col-mid { display: none; }
     .task-card { padding: 8px 10px; }
     .task-name { font-size: 13px; }
     .task-detail { font-size: 11px; }
@@ -470,17 +464,22 @@
             <button onclick="startTimer(10,'Breathing','breath')" class="timer-btn">10m</button>
           </div>
 
-          <div style="font-size:10px;color:#c4b8d8;letter-spacing:2px;text-transform:uppercase;padding:6px 4px 4px;">focus</div>
+          <div id="focus-label" style="font-size:10px;color:#c4b8d8;letter-spacing:2px;text-transform:uppercase;padding:6px 4px 4px;">focus</div>
           <div id="focus-tasks"></div>
 
-          <div style="font-size:10px;color:#c4b8d8;letter-spacing:2px;text-transform:uppercase;padding:8px 4px 4px;">drift</div>
+          <div id="drift-label" style="font-size:10px;color:#c4b8d8;letter-spacing:2px;text-transform:uppercase;padding:8px 4px 4px;">drift</div>
           <div id="drift-tasks"></div>
         </div>
 
       </div>
 
-      <!-- MIDDLE: recharge -->
-      <div class="col col-mid">
+      <!-- MIDDLE: CREATE (weekends) or empty (weekdays) -->
+      <div class="col col-mid" id="col-mid">
+        <!-- filled by JS on weekends -->
+      </div>
+
+      <!-- RIGHT: recharge -->
+      <div class="col col-right">
         <div class="col-section-label">✦ Recharge</div>
         <div class="recharge-box" style="background:linear-gradient(135deg,#f8f0ff,#f0fff8);border:1px dashed #d4b8e0;border-radius:13px;padding:6px 8px;">
           <div style="font-size:11px;color:#b0a0c8;text-align:center;padding:4px 0 3px;letter-spacing:1px;">doing these counts as a good day too</div>
@@ -488,17 +487,6 @@
         </div>
       </div>
 
-      <!-- RIGHT: empty for now -->
-      <div class="col col-right">
-        <div style="height:100%;border:1.5px dashed #ede8f5;border-radius:16px;display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:13px;color:#d4c8e8;letter-spacing:2px;">coming soon</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="low-note" id="low-note" style="display:none">
-      <p>Low day. One focus task is enough.</p>
     </div>
 
   </div>
@@ -560,12 +548,17 @@ const TASKS = {
     { id:'series', label:'Watch series or film', detail:'Full rest. No guilt.', emoji:'🎬', mins:null },
     { id:'gaia', label:'Gaia episode', detail:'Watch one episode on Gaia', emoji:'🌍', mins:40 },
   ],
+  create: [
+    { id:'pkm', label:'Work on PKM', detail:'Build your knowledge system', emoji:'🧠', mins:null },
+    { id:'daily_page', label:'Update Daily page', detail:'Log, reflect, update', emoji:'📅', mins:null },
+    { id:'cycle_app', label:'Make cycle calendar app', detail:'Build your cycle tracker', emoji:'🌙', mins:null },
+  ],
 };
 
 const PLANS = {
   good:   { focus:['ecba','dutch','linkedin'], drift:['movement','meditation'], weekly:[] },
-  medium: { focus:['ecba','dutch'],            drift:['movement','meditation'], weekly:[] },
-  low:    { focus:['ecba'],                    drift:['movement','meditation'], weekly:[] },
+  medium: { focus:['ecba','dutch','linkedin'], drift:['movement','meditation'], weekly:[] },
+  low:    { focus:['ecba','dutch','linkedin'], drift:['movement','meditation'], weekly:[] },
 };
 
 let state = { energy: null, done: {}, subDone: {} };
@@ -591,11 +584,12 @@ function renderHeader() {
   const now = new Date();
   document.getElementById('date-display').textContent =
     now.toLocaleDateString('en-NL', { day:'numeric', month:'long', year:'numeric' });
-  const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-  const today = now.getDay();
+  const days = ['MON','TUE','WED','THU','FRI','SAT','SUN'];
+  // Convert JS day (0=Sun…6=Sat) to Mon-based index (0=Mon…6=Sun)
+  const todayMon = (now.getDay() + 6) % 7;
   const wrap = document.getElementById('week-dots');
   wrap.innerHTML = days.map((d,i) =>
-    `<div class="week-dot ${i===today?'today':'other'}">${d[0]}</div>`
+    `<div class="week-dot ${i===todayMon?'today':'other'}">${d.slice(0,2)}</div>`
   ).join('');
 }
 
@@ -627,14 +621,45 @@ function showTasks() {
   document.getElementById('energy-screen').style.display = 'none';
   document.getElementById('tasks-screen').style.display = 'flex';
   renderCheckinBadge();
-  const ruleMap = { good: 'Complete <strong>3 focus tasks</strong> today.', medium: 'Pick <strong>2 focus tasks</strong> before noon.', low: 'Pick <strong>ONE focus task</strong> before noon. Day is successful.' };
+  const ruleMap = {
+    good:   'Complete <strong>3 focus tasks</strong> today.',
+    medium: 'Pick <strong>2 focus tasks</strong> before noon.',
+    low:    'Pick <strong>ONE task</strong> from the list. That\'s a full day.'
+  };
   document.getElementById('rule-text').innerHTML = ruleMap[state.energy] || '';
+
   const plan = PLANS[state.energy];
   renderSection('focus-tasks', plan.focus, TASKS.focus);
   renderSection('drift-tasks', plan.drift, TASKS.drift);
-
   renderSection('recharge-tasks', ['funcmed','sync','sims','read','kodnov','series','gaia'], TASKS.recharge);
-  document.getElementById('low-note').style.display = state.energy === 'low' ? 'block' : 'none';
+
+  // Hide focus/drift labels on low energy (no division)
+  const focusLabel = document.getElementById('focus-label');
+  const driftLabel = document.getElementById('drift-label');
+  if (state.energy === 'low') {
+    if (focusLabel) focusLabel.style.display = 'none';
+    if (driftLabel) driftLabel.style.display = 'none';
+  } else {
+    if (focusLabel) focusLabel.style.display = '';
+    if (driftLabel) driftLabel.style.display = '';
+  }
+
+  // Weekend CREATE section in middle column
+  const dayOfWeek = new Date().getDay(); // 0=Sun, 6=Sat
+  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+  const colMid = document.getElementById('col-mid');
+  if (isWeekend) {
+    colMid.innerHTML = `
+      <div class="col-section-label">✦ Create</div>
+      <div class="create-box">
+        <div style="font-size:11px;color:#b0a0c8;text-align:center;padding:4px 0 3px;letter-spacing:1px;">your creative projects</div>
+        <div id="create-tasks"></div>
+      </div>`;
+    renderSection('create-tasks', ['pkm','daily_page','cycle_app'], TASKS.create);
+  } else {
+    colMid.innerHTML = '';
+  }
+
   updateProgress();
 }
 
@@ -726,14 +751,19 @@ function refreshCard(id) {
 function updateProgress() {
   const plan = PLANS[state.energy];
   const focusDone = plan.focus.filter(id => state.done[id]).length;
-  const focusTotal = plan.focus.length; // 1 low, 2 medium, 3 good
   const driftDone = plan.drift.filter(id => state.done[id]).length;
+  const totalDone = focusDone + driftDone;
 
-  // 100% = all focus tasks for this energy level done
-  // Each drift task adds +10% on top
   let pct = 0;
-  if (focusTotal > 0) pct = Math.round((focusDone / focusTotal) * 100);
-  pct += driftDone * 10;
+  if (state.energy === 'low') {
+    // Low energy: any 1 task = 100%. Additional tasks are a bonus.
+    pct = totalDone > 0 ? 100 + (totalDone - 1) * 10 : 0;
+  } else {
+    // Medium / Good: focus tasks drive 100%, each drift adds +10%
+    const focusTotal = plan.focus.length;
+    if (focusTotal > 0) pct = Math.round((focusDone / focusTotal) * 100);
+    pct += driftDone * 10;
+  }
 
   const barPct = Math.min(pct, 100);
   const bar = document.getElementById('prog-bar');
@@ -742,7 +772,6 @@ function updateProgress() {
     ? 'linear-gradient(90deg, #c4a8e0, #a8e0c4)'
     : 'linear-gradient(90deg, #c4a8e0, #a8d0e0)';
 
-  const totalDone = focusDone + driftDone;
   document.getElementById('prog-count').textContent = totalDone + ' done';
 
   const pctEl = document.getElementById('prog-pct');
