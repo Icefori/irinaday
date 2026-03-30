@@ -869,4 +869,11 @@ async function init() {
   renderHeader();
   if (state.energy) { showTasks(); }
   // restore breathing state
-  if (state.breathDone) }
+  if (state.breathDone) {
+    const btn = document.getElementById('breath-btn');
+    const card = document.getElementById('breathing-card');
+    const name = document.getElementById('breath-name');
+    if (btn) btn.className = 'heart-btn checked';
+    if (card) card.style.opacity = '0.55';
+    if (name) name.style.textDecoration = 'line-through';
+  }
