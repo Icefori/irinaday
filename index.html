@@ -333,21 +333,19 @@
     .week-dot { width: 22px; height: 22px; font-size: 9px; }
   }
 
-  /* Phone (< 600px) — full-height sections with scroll snapping */
+  /* Phone (< 600px) — single column, content height */
   @media (max-width: 599px) {
     .three-col {
       grid-template-columns: 1fr;
-      grid-auto-rows: 100dvh;
-      gap: 0;
-      padding: 0;
+      grid-auto-rows: auto;
+      gap: 12px;
+      padding: 0 0 24px;
       overflow-y: auto;
-      scroll-snap-type: y mandatory;
     }
     .col {
-      scroll-snap-align: start;
-      min-height: 100dvh;
-      overflow-y: auto;
-      padding: 16px 12px;
+      min-height: 0;
+      overflow-y: visible;
+      padding: 0 12px;
     }
     .header { padding: 10px 14px; }
     .header-title { font-size: 16px; }
@@ -373,20 +371,18 @@
     .timer-digits { font-size: 32px; }
   }
 
-  /* Phone landscape — full-height sections with scroll snapping */
+  /* Phone landscape — single column, content height */
   @media (max-width: 767px) and (orientation: landscape) {
     .three-col {
       grid-template-columns: 1fr;
-      grid-auto-rows: 100dvh;
-      gap: 0;
-      padding: 0;
+      grid-auto-rows: auto;
+      gap: 12px;
+      padding: 0 0 24px;
       overflow-y: auto;
-      scroll-snap-type: y mandatory;
     }
     .col {
-      scroll-snap-align: start;
-      min-height: 100dvh;
-      overflow-y: auto;
+      min-height: 0;
+      overflow-y: visible;
       padding: 16px 12px;
     }
     .task-card { padding: 8px 10px; }
@@ -874,17 +870,3 @@ async function init() {
   if (state.energy) { showTasks(); }
   // restore breathing state
   if (state.breathDone) {
-    const btn = document.getElementById('breath-btn');
-    const card = document.getElementById('breathing-card');
-    const name = document.getElementById('breath-name');
-    if (btn) {
-      btn.className = 'heart-btn checked';
-      if(card) card.style.opacity = '0.65';
-      if(name) name.style.textDecoration = 'line-through';
-    }
-  }
-}
-init();
-</script>
-</body>
-</html>
