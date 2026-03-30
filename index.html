@@ -73,7 +73,11 @@
   }
   .recharge-box { flex: none; }
   .col-right > div { flex: 1; }
-  .col-mid:empty { display: none; }
+  .col-mid:empty {
+    display: none;
+    min-height: 0;
+    scroll-snap-align: none;
+  }
 
   #tasks-screen {
     display: none;
