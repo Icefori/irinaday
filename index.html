@@ -286,6 +286,10 @@
       gap: 16px;
       padding: 10px 24px 32px;
     }
+    .three-col:has(> .col-mid:empty),
+    .three-col:has(> .col-mid.col-hidden) {
+      grid-template-columns: repeat(2, 300px);
+    }
     .task-name { font-size: 14px; }
     .task-detail { font-size: 12px; }
   }
@@ -297,6 +301,10 @@
       max-width: 100%;
       gap: 12px;
       padding: 8px 16px 24px;
+    }
+    .three-col:has(> .col-mid:empty),
+    .three-col:has(> .col-mid.col-hidden) {
+      grid-template-columns: 1fr 1fr;
     }
     .task-name { font-size: 13px; }
     .task-detail { font-size: 11px; }
@@ -312,6 +320,10 @@
       max-width: 100%;
       gap: 12px;
       padding: 8px 16px 24px;
+    }
+    .three-col:has(> .col-mid:empty),
+    .three-col:has(> .col-mid.col-hidden) {
+      grid-template-columns: 1fr;
     }
     .task-name { font-size: 13px; }
     .task-detail { font-size: 11px; }
