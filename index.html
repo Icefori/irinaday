@@ -73,10 +73,11 @@
   }
   .recharge-box { flex: none; }
   .col-right > div { flex: 1; }
-  .col-mid:empty {
-    display: none;
-    min-height: 0;
-    scroll-snap-align: none;
+  .col-mid:empty,
+  .col-mid.col-hidden {
+    display: none !important;
+    min-height: 0 !important;
+    scroll-snap-align: none !important;
   }
 
   #tasks-screen {
@@ -667,6 +668,7 @@ function showTasks() {
   const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
   const colMid = document.getElementById('col-mid');
   if (isWeekend) {
+    colMid.classList.remove('col-hidden');
     colMid.innerHTML = `
       <div class="col-section-label">✦ Create</div>
       <div class="create-box">
@@ -676,6 +678,7 @@ function showTasks() {
     renderSection('create-tasks', ['pkm','daily_page','cycle_app'], TASKS.create);
   } else {
     colMid.innerHTML = '';
+    colMid.classList.add('col-hidden');
   }
 
   updateProgress();
